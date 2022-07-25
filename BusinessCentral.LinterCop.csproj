@@ -39,6 +39,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="netstandard" />
     <Reference Include="Microsoft.CodeAnalysis">
@@ -80,6 +83,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Composition.AttributedModel">
+      <HintPath>ms-dynamics-smb.al-latest\extension\bin\win32\System.Composition.AttributedModel.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.700.19.56404, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>ms-dynamics-smb.al-latest/extension/bin/Analyzers/System.Memory.dll</HintPath>
     </Reference>
@@ -93,6 +99,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeFixer\Fix0001FlowFieldsShouldNotBeEditableCodeFixProvider.cs" />
     <Compile Include="Design\Rule0001FlowFieldsShouldNotBeEditable.cs" />
     <Compile Include="Design\Rule0002CommitMustBeExplainedByComment.cs" />
     <Compile Include="Design\Rule0003DoNotUseObjectIDsInVariablesOrProperties.cs" />
@@ -113,6 +120,7 @@
     <Compile Include="Design\Rule0019DataClassificationFieldEqualsTable.cs" />
     <Compile Include="Design\Rule0020ApplicationAreaEqualsToPage.cs" />
     <Compile Include="Design\Rule0021ConfirmImplementConfirmManagement.cs" />
+    <Compile Include="Patches\CodeActionServiceLoaderPatcher.cs" />
     <Compile Include="Helpers\LinterSettings.cs" />
     <Compile Include="LinterCopAnalyzers.Designer.cs" />
     <Compile Include="LinterCopAnalyzers.Generated.cs" />

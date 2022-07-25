@@ -2,12 +2,20 @@
 using Microsoft.Dynamics.Nav.CodeAnalysis.Diagnostics;
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using BusinessCentral.LinterCop.Patches;
+using HarmonyLib;
 
 namespace BusinessCentral.LinterCop.Design
 {
     [DiagnosticAnalyzer]
     public class Rule0001FlowFieldsShouldNotBeEditable : DiagnosticAnalyzer
     {
+        public Rule0001FlowFieldsShouldNotBeEditable()
+        {
+            CodeActionServiceLoaderPatcher.TryPatch();
+        }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create<DiagnosticDescriptor>(DiagnosticDescriptors.Rule0001FlowFieldsShouldNotBeEditable);
 
         public override void Initialize(AnalysisContext context) => context.RegisterSymbolAction(new Action<SymbolAnalysisContext>(this.AnalyzeFlowFieldEditable), SymbolKind.Field);
