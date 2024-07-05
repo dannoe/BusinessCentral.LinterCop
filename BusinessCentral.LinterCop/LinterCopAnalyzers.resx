@@ -645,4 +645,13 @@
   <data name="Rule0059SingleQuoteEscapingIssueDetectedDescription" xml:space="preserve">
     <value>Single quote escaping issue detected: Use %1 or '''' for correct text escaping.</value>
   </data>
+  <data name="Rule0060CheckEventSubscriberVarKeywordTitle" xml:space="preserve">
+    <value>The parameter was published with the var keyword. Not specifiying the var parameter on the subscriber side could lead to bugs.</value>
+  </data>
+  <data name="Rule0060CheckEventSubscriberVarKeywordFormat" xml:space="preserve">
+    <value>The parameter was published with the var keyword. Not specifiying the var parameter on the subscriber side could lead to bugs.</value>
+  </data>
+  <data name="Rule0060CheckEventSubscriberVarKeywordDescription" xml:space="preserve">
+    <value>The parameter was published with the var keyword. Not specifiying the var parameter on the subscriber side could lead to bugs.</value>
+  </data>
 </root>
