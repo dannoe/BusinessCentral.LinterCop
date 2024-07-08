@@ -24,7 +24,7 @@ namespace BusinessCentral.LinterCop.Patches
 #endif
             try
             {
-                Patch();
+               Patch();
             }
             catch (FileNotFoundException e)
             {
@@ -42,17 +42,15 @@ namespace BusinessCentral.LinterCop.Patches
 
         public static void Patch()
         {
+            Harmony.DEBUG = true;
             var harmony = new Harmony("LinterCop.BusinessCentral");
 
             var assembly = typeof(CodeAction).Assembly;
             // The CodeActionServiceLoader type is marked as internal, so we have to get it via its full qualified name.
-            var codeActionServiceLoaderType =
-                assembly.GetType("Microsoft.Dynamics.Nav.CodeAnalysis.CodeActions.CodeActionServiceLoader");
+            var codeActionServiceLoaderType = assembly.GetType("Microsoft.Dynamics.Nav.CodeAnalysis.CodeActions.CodeActionServiceLoader");
             var originalConstructor = AccessTools.Constructor(codeActionServiceLoaderType);
-            _originalLoadDefaultAssembliesMethod =
-                AccessTools.Method(codeActionServiceLoaderType, "LoadDefaultAssemblies");
-            var constructorTranspiler =
-                AccessTools.Method(typeof(CodeActionServiceLoaderPatcher), nameof(ConstructorTranspiler));
+            _originalLoadDefaultAssembliesMethod = AccessTools.Method(codeActionServiceLoaderType, "LoadDefaultAssemblies");
+            var constructorTranspiler = AccessTools.Method(typeof(CodeActionServiceLoaderPatcher), nameof(ConstructorTranspiler));
             _addOwnAssemblyToBuilderMethodInfo = AccessTools.Method(typeof(CodeActionServiceLoaderPatcher),
                 nameof(AddOwnAssemblyToBuilder));
 
@@ -62,6 +60,7 @@ namespace BusinessCentral.LinterCop.Patches
 #if DEBUG
         [HarmonyDebug]
 #endif
+        [HarmonyTranspiler]
         private static IEnumerable<CodeInstruction> ConstructorTranspiler(IEnumerable<CodeInstruction> instructions)
         {
             foreach (var instruction in instructions)
